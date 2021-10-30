@@ -1,0 +1,41 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class ItemDemo extends Frame implements ActionListener {
+
+	Button b ;
+	Label l;
+	int count=0;
+	public ItemDemo() {
+		super(" Demo App");
+		b= new Button("Count");
+		b.setBounds(20, 40, 10, 5);
+		b.addActionListener(this);
+		
+		l= new Label("count "+count );
+		l.setAlignment(Label.CENTER);
+		
+		add(b);
+		add(l);
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		count+=2;
+		l.setName("Count is "+ count);
+		
+		if (count == 20) {
+			b.setEnabled(false);
+		}
+
+	}
+	
+	public static void main(String[] args) {
+		ItemDemo it = new ItemDemo();
+		it.setLayout(new FlowLayout());
+		it.setSize(500, 100);
+		it.setVisible(true);
+	}
+
+}

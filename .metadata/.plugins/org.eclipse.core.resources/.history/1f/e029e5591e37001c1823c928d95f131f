@@ -1,0 +1,37 @@
+import java.awt.BorderLayout;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+public class SwingsDemo extends JFrame implements ActionListener {
+
+	JButton b ;
+	JLabel l;
+	int count =0 ;
+	
+	public SwingsDemo() {
+	b = new JButton("count");
+	l=new JLabel("Count is "+count);
+	
+	b.addActionListener(this);
+	setLayout(new BorderLayout());
+	
+	add(b);
+	add(l);
+			
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		count++;
+		l.setText("Count is  "+count);
+		
+	}
+	
+	public static void main(String[] args) {
+		SwingsDemo sd = new SwingsDemo();
+		sd.setVisible(true);
+		sd.setSize(1000,800);
+		sd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}

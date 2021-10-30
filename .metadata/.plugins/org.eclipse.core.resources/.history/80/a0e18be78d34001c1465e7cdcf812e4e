@@ -1,0 +1,32 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ButtonDemo extends Frame implements ActionListener{
+
+	Frame f;
+	Label l;
+	Button b ;
+
+	public ButtonDemo() throws HeadlessException {
+		super("Application Demo");
+
+		setLayout(new FlowLayout());
+		l =new Label("Hola Frndss");
+		b = new Button("Submit");
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void main(String[] args) {
+		ButtonDemo bd = new ButtonDemo();
+		bd.setSize(500,500);
+		bd.setVisible(true);
+	}
+
+}
