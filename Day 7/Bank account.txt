@@ -1,23 +1,15 @@
 Q4. Bank Account
-Solved
-character backgroundcharacter
-Stuck somewhere?
-Ask for help from a TA and get it resolved..
-Get help from TA.
+
 Problem Description
 
 You are given a Bank account having N amount and you are asked to perfrom ADD(credit) and SUBTRACT(debit) operations.
 
 After each operation print the amount left in the Bank account. If the debit amount is greater than current balance print "Insufficient Funds"(without quotes) and the operation is skipped.
 
-
-
 Problem Constraints
 
 1 <= N, X <= 1011
 1 <= Number of operations <= 105
-
-
 
 Input Format
 
@@ -30,12 +22,9 @@ Each of next M lines contains two space separated integers Type and Amount(X).
 If Type == 1, Perform ADD operation.
 If Type == 2, Perform SUBTRACT operation.
 
-
 Output Format
 
 Print Amount in the bank balance after each operation on a new line.
-
-
 
 Example Input
 
@@ -45,13 +34,11 @@ Example Input
 2 1400
 2 500
 
-
 Example Output
 
 1500
 100
 Insufficient Funds
-
 
 Example Explanation
 
