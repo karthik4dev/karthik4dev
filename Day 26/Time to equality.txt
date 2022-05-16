@@ -1,0 +1,52 @@
+Problem Description
+Given an integer array A of size N. In one second, you can increase the value of one element by 1.
+
+Find the minimum time in seconds to make all elements of the array equal.
+
+
+Problem Constraints
+1 <= N <= 1000000
+1 <= A[i] <= 1000
+
+
+Input Format
+First argument is an integer array A.
+
+
+Output Format
+Return an integer denoting the minimum time to make all elements equal.
+
+
+Example Input
+A = [2, 4, 1, 3, 2]
+
+
+Example Output
+8
+
+
+Example Explanation
+We can change the array A = [4, 4, 4, 4, 4]. The time required will be 8 seconds.
+
+Ans -
+
+class Solution:
+# @param A : list of integers
+# @return an integer
+def solve(self, A):
+# Minimum Time = (Length of Array)*(Max. Element) - (Sum of all elements)
+# min_time = N*(max_ele) - Sum
+
+#Calculating Sum and Max. Element
+N=len(A)
+Sum=0
+max_ele=A[0]
+
+for i in range(N):
+Sum=Sum+A[i]
+if A[i]>max_ele:
+max_ele=A[i]
+#Calculating min_time
+min_time=N*max_ele-Sum
+
+return min_time

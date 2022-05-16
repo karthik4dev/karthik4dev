@@ -1,0 +1,118 @@
+Problem Description
+Given an array, arr[] of size N, the task is to find the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+
+
+
+Problem Constraints
+1 <= n <= 105
+-105 <= A[i] <= 105
+
+
+Input Format
+First argument contains an array A of integers of size N
+
+
+Output Format
+Return the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+
+
+
+Example Input
+Input 1:
+A=[2, 1, 6, 4]
+Input 2:
+
+A=[1, 1, 1]
+
+
+Example Output
+Output 1:
+1
+Output 2:
+
+3
+
+
+Example Explanation
+Explanation 1:
+Removing arr[1] from the array modifies arr[] to { 2, 6, 4 } such that, arr[0] + arr[2] = arr[1]. 
+Therefore, the required output is 1. 
+Explanation 2:
+
+Removing arr[0] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1] 
+Removing arr[1] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1] 
+Removing arr[2] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1] 
+Therefore, the required output is 3.
+
+Ans-
+
+public class Solution {
+    public int solve(int[] A) {
+        // 0 1 2 3 4 5 6 7 - A
+        // before deletion of 3rd index. Equation is  Even[0 2] + Even [4 7] == Odd[0 2] + Odd[4 7]
+        // Even [0 to 2]  3  Even[4 to 7]
+        // Odd  [0 to 2]  3  Odd [4 to 7]
+        // After Deletion equation turns to          Even[0 2] + Odd [4 7] == Odd[0 2] + Even[4 7]
+        //                                           evenLeft + oddRight   == oddLeft + evenRight
+        int n = A.length;
+        int[] pfEven = new int[n]; // odd prefix
+        int[] pfOdd = new int[n];  // even prefix
+        int count = 0; // ways to make sum
+        pfEven[0] = A[0]; // default 0th index is even
+        pfOdd[0] = 0;     // 0th odd
+        for(int i = 1; i < n; i++){
+            if(i%2 == 0){
+                pfEven[i] = pfEven[i-1] + A[i];
+                pfOdd[i] = pfOdd[i-1];
+            } else{
+                pfOdd[i] = pfOdd[i-1] + A[i];
+                pfEven[i] = pfEven[i-1];
+            }
+        }
+        int evenSum = 0;
+        int oddSum = 0;
+        // handling cases for 0th index and n-1'th Index
+        // EvenSum
+        int evenLeft = 0; // for 0th index there won't be any left elements hence its zero
+        // L-R is 1 to n-1. so standard prefix is pf[R] - pf[L-1] => pf[n-1] - pf[1-1] => pf[n-1] - pf[0]
+        int oddRight = pfOdd[n-1]-pfOdd[0];  
+        evenSum = evenLeft + oddRight;
+
+        // Odd Sum
+        int oddLeft = 0; // for 0th index there won't be any left elements hence its zero
+        int evenRight = pfEven[n-1] - pfEven[0]; // L-R is 1 to n-1
+        oddSum = oddLeft + evenRight;
+        if(evenSum == oddSum)
+            count++;
+
+        for(int i = 1; i < n-1; i++){
+            // EvenSum
+            evenLeft = pfEven[i-1];
+             // i+1 to n-1 //    pf[r] - pf[l-1] - to get prefix standard
+             // hence pfOdd[n-1] - pfOdd[i+1-1]
+            oddRight = pfOdd[n-1]-pfOdd[i];
+            evenSum = evenLeft + oddRight;
+
+            // Odd Sum
+            oddLeft = pfOdd[i-1];
+            evenRight = pfEven[n-1] - pfEven[i];
+            oddSum = oddLeft + evenRight;
+            if(evenSum == oddSum)
+                count++;
+        }
+        // handling cases for n-1th index
+        // EvenSum
+        evenLeft = pfEven[n-2]; // even left is till n-2th index
+        oddRight = 0;           // for n-1'th index there won't be any right elements hence its zero
+        evenSum = evenLeft + oddRight;
+
+        // Odd Sum
+        oddLeft = pfOdd[n-2]; // odd left is till n-2th index
+        evenRight = 0;        // for n-1'th index there won't be any right elements hence its zero
+        oddSum = oddLeft + evenRight;  // left and right sum of add and even
+        if(evenSum == oddSum)
+            count++;
+
+        return count;
+    }
+}
