@@ -1,0 +1,101 @@
+Problem Description
+You are given an integer array A. You have to find the second largest element/value in the array or report that no such element exists.
+
+
+
+Problem Constraints
+1 <= |A| <= 105
+
+0 <= A[i] <= 109
+
+
+
+Input Format
+The first argument is an integer array A.
+
+
+
+Output Format
+Return the second largest element. If no such element exist then return -1.
+
+
+
+Example Input
+Input 1:
+
+ A = [2, 1, 2] 
+Input 2:
+
+ A = [2]
+
+
+Example Output
+Output 1:
+
+ 2 
+Output 2:
+
+ -1 
+
+
+Example Explanation
+Explanation 1:
+
+ First largest element = 2
+ Second largest element = 2
+ Third largest element = 1
+Explanation 2:
+
+ There is no second largest element in the array.
+
+Ans-
+
+// JAVA Code for Find Second largest
+// element in an array
+class GFG {
+
+	/* Function to print the second largest
+	elements */
+	public static void print2largest(int arr[],
+									int arr_size)
+	{
+		int i, first, second;
+
+		/* There should be atleast two elements */
+		if (arr_size < 2) {
+			System.out.print(" Invalid Input ");
+			return;
+		}
+
+		first = second = Integer.MIN_VALUE;
+		for (i = 0; i < arr_size; i++) {
+			/* If current element is greater than
+			first then update both first and second */
+			if (arr[i] > first) {
+				second = first;
+				first = arr[i];
+			}
+
+			/* If arr[i] is in between first and
+			second then update second */
+			else if (arr[i] > second && arr[i] != first)
+				second = arr[i];
+		}
+
+		if (second == Integer.MIN_VALUE)
+			System.out.print("There is no second largest"
+							+ " element\n");
+		else
+			System.out.print("The second largest element"
+							+ " is " + second);
+	}
+
+	/* Driver program to test above function */
+	public static void main(String[] args)
+	{
+		int arr[] = { 12, 35, 1, 10, 34, 1 };
+		int n = arr.length;
+		print2largest(arr, n);
+	}
+}
+
