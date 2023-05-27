@@ -53,7 +53,7 @@ public class TaskController {
         return null;
     }
     @DeleteMapping("/{id}")
-    public void deleteTaskById(@PathVariable int id){
+    public String deleteTaskById(@PathVariable int id){
         int v = 0;
         for (Task i : tasks){
             if(i.getTaskId()==id){
@@ -62,6 +62,6 @@ public class TaskController {
             }
 
         }
-//        return new String("The task " + v +" is deleted");
+        return new String("The task " + v +" is deleted");
     }
 }
